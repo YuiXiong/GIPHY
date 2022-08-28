@@ -4,13 +4,14 @@ import Image from "./Components/Image/Image";
 import Form from "./Components/Form/Form";
 import axios from "axios";
 
+
 function App() {
   const [gifURL, getGifURL] = useState("");
-  const gaKey = "1vLYyRUfrWa2giqKBPQzmWjqkhHx91oK";
+
 
   //random GIF call that returns embeded URL
   const randomGif = async () => {
-    const randomGifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${gaKey}`;
+    const randomGifUrl = `https://api.giphy.com/v1/gifs/random?api_key=${process.env.REACT_APP_SECRET_KEY}`;
     const randomGifRet = await axios.get(randomGifUrl);
     getGifURL(randomGifRet.data.data.images.original.url);
   };
@@ -20,7 +21,7 @@ function App() {
 
   // search function by using API
 const searchSubmit = async (text) => {
-  const searchGifUrl = `https://api.giphy.com/v1/gifs/search?api_key=${gaKey}&q=${text.current.value}`;
+  const searchGifUrl = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_SECRET_KEY}&q=${text.current.value}`;
   const searchGifRet = await axios.get(searchGifUrl);
     getGifURL(searchGifRet.data.data[Math.floor(Math.random() * 10)].images.original.url);
 };  
