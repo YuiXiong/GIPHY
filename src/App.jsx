@@ -21,9 +21,8 @@ function App() {
   // search function by using API
 const searchSubmit = async (text) => {
   const searchGifUrl = `https://api.giphy.com/v1/gifs/search?api_key=${gaKey}&q=${text.current.value}`;
-  console.log('search ok')
-    const searchGifRet = await axios.get(searchGifUrl);
-    getGifURL(searchGifRet.data.data[0].images.original.url);
+  const searchGifRet = await axios.get(searchGifUrl);
+    getGifURL(searchGifRet.data.data[Math.floor(Math.random() * 10)].images.original.url);
 };  
 
 
@@ -32,7 +31,7 @@ const searchSubmit = async (text) => {
       <h1>YX's GIPHY Clone</h1>
       <Form submitFn={searchSubmit}/>
       <Image gifURL={gifURL} />
-      <p>bottom</p>
+     
     </div>
   );
 }
